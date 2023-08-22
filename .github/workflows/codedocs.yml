@@ -1,0 +1,21 @@
+name: Knowl AI Code Documents
+run-name: generate code docs
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+  
+jobs:
+  gen-ai-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Generate AI docs
+        uses: knowl-doc/knowl-ai-code-docs@main
+        env:
+          KNOWL_API_KEY: ${{secrets.KNOWL_API_KEY}}
+          OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+          OPENAI_BATCH_SIZE: 40
